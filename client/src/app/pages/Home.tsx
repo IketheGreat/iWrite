@@ -4,22 +4,22 @@ import Poster from "../../assets/poster.jpg";
 
 function Home() {
   return (
-    <div className=" w-full h-screen pt-16">
-      <div className="flex justify-center gap-20 py-10">
-        <div className=" flex flex-col items-start gap-5">
-          <span className=" text-blue-500 font-bold text-5xl leading-tight">
+    <div className="w-full pt-16 mb-32 h-full">
+      <div className="flex sm:flex-row flex-col justify-center gap-20 py-10">
+        <div className=" flex flex-col sm:items-start items-center gap-5">
+          <span className=" text-blue-500 font-bold sm:text-5xl text-2xl leading-tight">
             WRITE YOUR OWN STORIES <br />
             AND SHARE WITH <br />
             EVERYONE
           </span>
-          <span className=" leading-7">
+          <div className="leading-7 text-sm">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
             quae, <br /> expedita tenetur magnam sapiente fuga, maxime enim quis{" "}
             <br /> eum qui excepturi quas. Cum perferendis ut temporibus <br />{" "}
             similique recusandae exercitationem nobis.
-          </span>
+          </div>
           <Link to="/write">
-            <button className=" py-1 px-5 text-white bg-blue-500 rounded-md">
+            <button className="py-1 px-5 text-white bg-blue-500 rounded-md">
               Write a Story
             </button>
           </Link>
