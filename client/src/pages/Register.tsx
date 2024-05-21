@@ -7,12 +7,13 @@ import { RootState } from "../app/store";
 import { toast } from "react-toastify";
 import { MyError } from "../interface/error";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Register() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const {data:user, status} = useSelector((state: RootState) => state.auth);
+  const { data: user, status } = useSelector((state: RootState) => state.auth);
   const error = useSelector((state: RootState) => state.auth.error as MyError);
 
   const [inputs, setInputs] = useState({
@@ -20,6 +21,12 @@ export default function Register() {
     email: "",
     password: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prevState) => ({
@@ -88,9 +95,9 @@ export default function Register() {
                 </div>
               )}
           </div>
-          <div>
+          <div className="relative">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               min={5}
               className="border w-full p-2 outline-blue-500"
@@ -99,6 +106,19 @@ export default function Register() {
               value={inputs.password}
               onChange={handleChange}
             />
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+              {showPassword ? (
+                <FaEyeSlash
+                  className="w-5 h-5 text-black text-opacity-25 cursor-pointer"
+                  onClick={togglePassword}
+                />
+              ) : (
+                <FaEye
+                  className="w-5 h-5 text-black text-opacity-25 cursor-pointer"
+                  onClick={togglePassword}
+                />
+              )}
+            </div>
             {error &&
               Array.isArray(error) &&
               error.some((err) => err.path === "password") && (
