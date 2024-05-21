@@ -39,7 +39,7 @@ const login = async (req, res) => {
         const user = await User.findOne({ email: req.body.email })
 
         if(!user){
-            return res.status(404).json({
+            return res.status(400).json({
                 message: "User is not found"
             })
         }

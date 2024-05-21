@@ -5,10 +5,18 @@ const mongoose = require("mongoose")
 const multer = require("multer")
 const fs = require("fs")
 const protectAuth = require("./middlewares/protectAuth")
+const cors = require("cors")
 
 const app = express()
 
 app.use(express.json())
+
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 const storage = multer.diskStorage({
     destination: (_, __, cb) => {
@@ -25,12 +33,17 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 app.post("/poster", protectAuth, upload.single("story-poster"), (req, res) => {
+
+    if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+    }
+
     return res.status(200).json({
         URL: `api/posters/${req.file.originalname}`
     })
 })
 
-app.use("api/posters", express.static("uploads"))
+app.use("/api/posters", express.static("uploads"))
 app.use("/api/user", require("./routes/user.routes"))
 app.use("/api/stories", require("./routes/stories.routes"))
 
