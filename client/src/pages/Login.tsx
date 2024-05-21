@@ -7,12 +7,19 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { MyError } from "../interface/error";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const {data:user, status} = useSelector((state: RootState) => state.auth);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const { data: user, status } = useSelector((state: RootState) => state.auth);
   const error = useSelector((state: RootState) => state.auth.error as MyError);
 
   const [inputs, setInputs] = useState({
@@ -68,9 +75,9 @@ export default function Login() {
                 </div>
               )}
           </div>
-          <div>
+          <div className="relative">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               min={5}
               className="border w-full p-2 outline-blue-500"
@@ -79,6 +86,19 @@ export default function Login() {
               value={inputs.password}
               onChange={handleChange}
             />
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+              {showPassword ? (
+                <FaEyeSlash
+                  className="w-5 h-5 text-black text-opacity-25 cursor-pointer"
+                  onClick={togglePassword}
+                />
+              ) : (
+                <FaEye
+                  className="w-5 h-5 text-black text-opacity-25 cursor-pointer"
+                  onClick={togglePassword}
+                />
+              )}
+            </div>
             {error &&
               Array.isArray(error) &&
               error.some((err) => err.path === "password") && (
