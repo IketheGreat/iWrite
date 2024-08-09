@@ -45,7 +45,7 @@ export default function Register() {
         navigate("/");
       }
     } catch (error) {
-      toast.error(error);
+      toast.error(error as string);
     }
   };
 
