@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node api/index,js",
-    "server": "nodemon api/index.js",
-    "client": "npm run dev --prefix client"
+    "start": "nodemon api/index,js"
   },
   "keywords": [],
   "author": "",
