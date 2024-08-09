@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 // };
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000" || "https://i-write-server.vercel.app",
+  baseURL: "https://i-write-server.vercel.app",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
