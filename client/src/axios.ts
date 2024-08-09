@@ -1,4 +1,3 @@
-
 import axios, { AxiosResponse } from "axios";
 
 // export type ApiErrorResponse = {
@@ -7,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 // };
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "http://localhost:5000" || "https://i-write-server.vercel.app",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -27,9 +26,7 @@ axiosInstance.interceptors.response.use(
 );
 
 const getToken = async () => {
-  const accessToken = (await localStorage.getItem(
-    "token"
-  )) as string | null;
+  const accessToken = (await localStorage.getItem("token")) as string | null;
   return accessToken;
 };
 
